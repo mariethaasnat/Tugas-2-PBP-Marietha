@@ -1,0 +1,134 @@
+[
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Abominable",
+            "rating": 4.6,
+            "release_date": "2019-10-04",
+            "review": "\"My mind has been blown away by how much effort went into nearly every aspect of this movie.\" -Isaac Nottie"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Cruella",
+            "rating": 4.7,
+            "release_date": "2021-05-26",
+            "review": "\"Best Disney Villain Movie out so far doesn't humanize her too much didn't do the joker thing it was just ..Cruella and fabulously brilliant!\" - Sahil Kaif"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Fall in Love at First Kiss",
+            "rating": 4.8,
+            "release_date": "2019-02-27",
+            "review": "\"This movie was a hit for my top romance movies list.\" -Ishqi Nabila"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Five Feet Apart",
+            "rating": 4.8,
+            "release_date": "2019-03-15",
+            "review": "\"Well first time in a long time I don't have to tell you anything about it but my tears will.\" -Rishi Saha"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Friend Zone",
+            "rating": 4.8,
+            "release_date": "2019-03-20",
+            "review": "\"This is a kind of common story but doesn't let you predict the next scenes.\" -Jose Zarim"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 6,
+        "fields": {
+            "watched": false,
+            "title": "Hello, Goodbye and Everything in Between",
+            "rating": 3.5,
+            "release_date": "2022-07-06",
+            "review": "\"I was on the edge of my seat screaming at the tv for the outcomes i wanted.\" -Clara Winecka"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "Hidden Figures",
+            "rating": 4.8,
+            "release_date": "2017-03-10",
+            "review": "\"It's a story of greatness demanding acknowledgement.\" -Ari"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "Luck",
+            "rating": 4.2,
+            "release_date": "2022-08-05",
+            "review": "\"Great feel good movie that doesn't come off as cheesy. Animation was great and well done.\" -Taylor Vandeventer"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 9,
+        "fields": {
+            "watched": false,
+            "title": "Miracle in Cell No. 7 (Indonesian remake)",
+            "rating": 4.5,
+            "release_date": "2022-09-08",
+            "review": "\"This film will make you laugh. This film will make you cry\" -Amini Fatima"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 10,
+        "fields": {
+            "watched": false,
+            "title": "The Edge of Seventeen",
+            "rating": 4.5,
+            "release_date": "2016-11-18",
+            "review": "\"A sincerely crafted, carefully processed & skilfully executed teen comedy that may resonate even with those whose teenage days are behind them.\" -Edward Micu"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 11,
+        "fields": {
+            "watched": true,
+            "title": "Tron Legacy",
+            "rating": 4.7,
+            "release_date": "2010-12-17",
+            "review": "\"Stunning, deep, intelligent, amazing acting all around.\" -Patrick Edward"
+        }
+    },
+    {
+        "model": "mywatchlist.WatchlistItem",
+        "pk": 12,
+        "fields": {
+            "watched": false,
+            "title": "West Side Story",
+            "rating": 4.2,
+            "release_date": "2021-12-08",
+            "review": "\"Holy baloney. If you are thinking of watching this movie, grab the tissues.\" -Eve Healey"
+        }
+    }
+]
