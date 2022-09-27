@@ -26,7 +26,7 @@
         "pk": 3,
         "fields": {
             "watched": true,
-            "title": "Fall in Love at First Kiss",
+            "title": "Fall in Love @ First Kiss",
             "rating": 4.8,
             "release_date": "2019-02-27",
             "review": "\"This movie was a hit for my top romance movies list.\" -Ishqi Nabila"
@@ -59,7 +59,7 @@
         "pk": 6,
         "fields": {
             "watched": false,
-            "title": "Hello, Goodbye and Everything in Between",
+            "title": "Hello, ... in Between",
             "rating": 3.5,
             "release_date": "2022-07-06",
             "review": "\"I was on the edge of my seat screaming at the tv for the outcomes i wanted.\" -Clara Winecka"
@@ -92,7 +92,7 @@
         "pk": 9,
         "fields": {
             "watched": false,
-            "title": "Miracle in Cell No. 7 (Indonesian remake)",
+            "title": "Miracle in Cell No. 7",
             "rating": 4.5,
             "release_date": "2022-09-08",
             "review": "\"This film will make you laugh. This film will make you cry\" -Amini Fatima"
