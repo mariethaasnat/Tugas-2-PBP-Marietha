@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+
+  <style>
+    * {
+      font-family: Courier New;
+      color: black;
+      text-align: center; 
+      vertical-align: middle;
+      background-color: rgb(230, 191, 176);
+      font-size: 15px;
+    }
+    h1 {
+        font-size: 35px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    table {
+      margin: auto;
+      padding: 1em;
+      border: 2px solid rgb(87, 73, 73);
+      border-radius: 1em;
+      border-collapse: collapse;
+      table-layout:fixed;
+      width: 80%;
+      vertical-align: middle;
+    }
+    th {
+      color: rgb(248, 111, 111);
+    }
+    a, a.visited {
+      color: rgb(200, 49, 119);
+    }
+</style>
+
+  <h1>! TO DO LIST !</h1>
+  <h2>Tugas 4 Assignment PBP/PBD</h2>
+
+  <h3>Hello {{username}} 😊</h3>
+  
+  <br/>
+  <table BORDER = "1">
+    <tr>
+      <th>Task Creation Date</th>
+      <th>Task Title</th>
+      <th>Task Description</th>
+      <th>Task Status</th>
+      <th>Task Button Status</th>
+      <th>Delete Task</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for item in todolist_item %}
+      <tr>
+        <td>{{item.date}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.description}}</td>
+        <td>
+          {% if item.is_finished %}
+          ✅ Finished ✅
+          {% else %}
+          ❌ Not Yet ❌
+          {% endif%}
+        </td>
+        <td><button><a href="{% url 'todolist:status_change' item.id %}">Task Status Change</a></button></td>
+        <td><button><a href="{% url 'todolist:delete_task' item.id %}">Delete Task</a></button></td>
+      </tr>
+    {% endfor %}
+  </table>
+  
+  <br/>
+  <button><a href="{% url 'todolist:new_todolist' %}">New To Do List</a></button>
+  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+
+{% endblock content %}

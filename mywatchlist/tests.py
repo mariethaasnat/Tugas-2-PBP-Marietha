@@ -14,10 +14,10 @@ class UnitTest (TestCase):
         response = x.client.get(x.mywatchlist_html)
         x.assertEqual(response.status_code, 200)
 
-    def show_xml (x):
+    def test_xml (x):
         response = x.client.get(x.mywatchlist_xml)
         x.assertEqual(response.status_code, 200)
     
-    def show_json (x):
+    def test_json (x):
         response = x.client.get(x.mywatchlist_json)
         x.assertEqual(response.status_code, 200)
