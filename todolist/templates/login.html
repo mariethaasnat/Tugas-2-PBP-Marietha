@@ -13,21 +13,34 @@
       text-align: center; 
       vertical-align: middle;
       background-color: powderblue;
-      font-size: 15px;
+      font-size: 18px;
     }
-    td, input {
-      text-align: left; 
+    td {
+      text-align: left;
+    }
+    input {
+      text-align: left;
+      margin: 5px 0;
+      padding: 1px 1px;
     }
     h1 {
-        font-size: 35px;
+      margin-top: 50px;
+      margin-bottom: 0px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    .btn {
+      margin-top: 10px;
     }
     form {
       margin: auto;
+      margin-bottom: 12px;
       width: 400px;
       padding: 1em;
       border: 2px solid rgb(87, 73, 73);
       border-radius: 1em;
       table-layout:fixed;
+      background-color: powderblue;
     }
     a, a.visited {
       color: rgb(27, 143, 237);
@@ -37,25 +50,27 @@
 <div class = "login">
 
     <h1>Login To Do List</h1>
+    <br/>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <div class="username">
+            <div class="col-xl-2 align-self-center">
+                <label class="form-lable" for="user_username">Username:</label>
+            </div>
+            <div class="col align-self-center">
+                <input type="text" name="username" placeholder="Input username" id="user_username" class="form-control">
+            </div>
+        </div>
+        <div class="password">
+            <div class="col-xl-2 align-self-center">
+                <label class="form-lable" for="user_password">Password:</label>
+            </div>
+            <div class="col align-self-center">
+                <input type="password" name="password" placeholder="Input password" id="user_password" class="form-control">
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Login" class="btn btn-outline-dark mx-auto d-block">
     </form>
 
     {% if messages %}
@@ -66,7 +81,6 @@
         </ul>
     {% endif %}     
     
-    <br/>
     Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
 
 </div>
