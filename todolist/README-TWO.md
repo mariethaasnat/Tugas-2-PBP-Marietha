@@ -9,8 +9,10 @@ Kode Asdos : BI
 #### Jelaskan perbedaan antara _asynchronous programming_ dengan _synchronous programming_.
 **Asynchronous Programming** <br />
 Model _programming multithreaded_ (dapat digunakan oleh lebih dari satu user tanpa membutuhkan duplikasi dari program yang sedang dijalankan) yang paling sering diaplikasikan pada jaringan dan komunikasi. _Asynchronous_ bersifat _non-blocking_ yang berarti model ini tidak memblokir eksekusi lebih lanjut saat satu atau lebih operasi sedang berlangsung, sehingga beberapa operasi yang berhubungan dapat dijalakan secara bersamaan tanpa menunggu _task_ lain untuk diselesaikan. Salah satu contoh _Asynchronous Programming_ adalah SMS, dimana saat satu orang mengirim pesan teks dan penerima belum merespon teks tersebut, pengirim dapat melakukan hal lain selagi menunggu jawaban dari penerima. <br />
+
 **Synchronous Programming** <br />
 Model _programming single-thread_ (hanya dapat menjalankan satu eksekusi setiap waktunya) dan ideal untuk pemrograman yang bersifat reaktif. _Synchronous_ bersifat _blocking_ yang berarti model ini akan mengikuti rangkaian operasi yang akan dieksekusi dan setiap operasi atau eksekusi dilakukan satu per satu, sehingga saat suatu operasi dijalankan, operasi lainnya diblokir dan tidak dapat dijalankan. Penyelesaian suatu operasi akan memicu operasi berikutnya dan seterusnya hingga selesai. Salah satu contoh _Synchronous Programming_ adalah telepon, dimana saat satu orang berbicara, orang yang satunya mendengarkan, dan saat orang pertama selesai, orang kedua cenderung segera merespons orang pertama tersebut. <br />
+
 **Perbedaan _Asynchronous Programming_ dan _Synchronous Programming_** <br />
 | Asynchronous Programming | Synchronous Programming |
 | --- | --- |
