@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from multiprocessing import context
 from todolist.models import Task
 from todolist.forms import NewToDoListForms
 
@@ -62,46 +63,60 @@ def logout_user (request):
     return response
 
 @login_required(login_url='/todolist/login/')
-@csrf_exempt
 def new_todolist (request):
-    if request.method == "POST":
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        user = request.user
-
-        Task.objects.create(user=user, title=title, description=description)        
-        return HttpResponseRedirect('/todolist/')
-    
-    return render(request, 'newtodolist.html', {})
+    if request.user.is_authenticated:
+        form = NewToDoListForms(request.POST)
+        if request.method == 'POST' and form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            task_baru = Task.objects.create(title=title, description=description,
+                                                user=request.user, date=datetime.date.today())
+            return redirect('todolist:show_todolist')
+        
+        context = {
+            'form' : form,
+        }
+        return render(request, 'newtodolist.html', context)
+    else:
+        return redirect('todolist:login')
 
 @login_required(login_url='/todolist/login/')
-@csrf_exempt
 def new_todolist_ajax (request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        user = request.user
+    if request.user.is_authenticated:
+        form = NewToDoListForms(request.POST)
+        response_data = {}
+        if request.method == 'POST' and form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            task_baru = Task.objects.create(title=title, description=description,
+                                                user=request.user, date=datetime.date.today())
+            response_data['title'] = title
+            response_data['description'] = description
+            response_data['date'] = datetime.date.today()
+            return JsonResponse(response_data);
 
-        Task.objects.create(user=user, title=title, description=description)
-        return JsonResponse({'error': False})
+        context = {
+            'form': form,
+        }
+        return render(request, 'newtodolist.html', context)
+    else:
+        return redirect('todolist:login')
 
 @login_required(login_url='/todolist/login/')
-@csrf_exempt
 def status_change (request, id):
     if request.user.is_authenticated:
         data_todolist = Task.objects.get(id=id)
         data_todolist.is_finished = not data_todolist.is_finished
         data_todolist.save()
-        return HttpResponseRedirect (reverse('todolist:show_todolist'))
+        return redirect('todolist:show_todolist')
     else :
         return redirect('todolist:login')
 
 @login_required(login_url='/todolist/login/')
-@csrf_exempt
 def delete_task (request, id):
     if request.user.is_authenticated:
         Task.objects.filter(id=id).delete()
-        return HttpResponseRedirect (reverse('todolist:show_todolist'))
+        return redirect('todolist:show_todolist')
     else :
         return redirect('todolist:login')
 

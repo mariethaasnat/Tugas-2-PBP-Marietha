@@ -4,11 +4,6 @@
 
 {% block content %}
 <!doctype html>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<head>
   <style>
     * {
       font-family: Courier New;
@@ -55,88 +50,111 @@
       color: rgb(154, 80, 50);
     }
   </style>
-</head>
-
-  <h1>! TO DO LIST !</h1>
-  <h2>Tugas 4 Assignment PBP/PBD</h2>
-  <h3>Hello {{username}} 😊</h3>
 
   <body class="padding">
-    <div id="rcorners1" style="margin-top: 30px; margin-bottom:10px;">
-      <div class="row">
+    <h1>! TO DO LIST !</h1>
+    <h2>Tugas 4 Assignment PBP/PBD</h2>
+    <h3>Hello {{username}} 😊</h3>
+    <div id="rcorners1" style="margin-top: 30px; margin-bottom:10px;"></div>    
         
     <!-- Modal from: https://getbootstrap.com/docs/5.2/components/modal/ -->
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="addModalLabel" style="font-weight: bold;">Create New To Do List</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel" style="font-weight: bold;">Create New To Do List
+                  </h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body justify-content-center" style="display:block; margin:0 auto">
                   <form id="form" onsubmit="return false;">
-                  {% csrf_token %}
-                  <input type="text" name="title" maxlength="255" placeholder="Task Title">
-                  <br>
-                  <input style="margin-top: 16px;" type="text" name="description" placeholder="Task Description">
+                      {% csrf_token %}
+                      <input type="text" name="title" maxlength="255" placeholder="Task Title">
+                      <br>
+                      <input style="margin-top: 16px;" type="text" name="description" placeholder="Task Description">
               </div>
               <div class="modal-footer" style="justify-content: center;">
-                  <button id="button" type="submit" class="button_select button_select_new button" data-bs-dismiss="modal" style="background-color:#6200EE">Create Task</button>
+                  <button id="button" type="submit" class="button_select button_select_new"
+                      data-bs-dismiss="modal">Create New To Do List</button>
               </div>
           </div>
       </div>
-  </div>
+    </div>
 
-  <div class="row" id="cards"></div>
+  <div class="row" id="taskCards"></div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
       $(document).ready(function () {
-          taskCards();
+        showTask();
       });
+
       document.getElementById("button").onclick = addTodo
 
-      $("#addModal").on("hidden.bs.modal", function (e) {
-          $("#form").find("input[type=text]").val("");
-      })
-
-      // Source (Solusi Tutorial 5) 
-      // https://github.com/pbp-fasilkom-ui/tutorial-5-example/blob/main/barang_wishlist/templates/index_wishlist.html
+      // Source (Solusi Tutorial 5) : https://github.com/pbp-fasilkom-ui/tutorial-5-example/blob/main/barang_wishlist/templates/index_wishlist.html
       function addTodo() {
-          fetch("/todolist/add/", {
-          method: "POST",
-          body: new FormData(document.querySelector("#form"))
-          }).then(taskCards)
-          return false
-      }
+            fetch("{% url 'todolist:new_todolist_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(showTask)
+            return false
+        }
 
-      function taskCards() {
-          $("#cards").empty();
-          $.get("/todolist/json/", function(data) {
-              for (i=0; i<data.length; i++){
-                  let status = data[i].fields.status ? "✅ Finished ✅" : "❌ Not Yet ❌";
-                  $("#cards").append(`
-                  <div class="col-md-6 col-lg-3">
-                      <div class="card shadow p-3 mb-5 bg-white rounded border-0" style="padding-right: 10px;">
-                          <div class="card-body d-flex flex-column">
-                              <h4 class="card-title" style="font-weight: bold; color: #6638A6;">${data[i].fields.title}</h4>
-                              <h5 class="card-text">${status}</h5>
-                              <p class="card-text" style="font-size: 16px;">${data[i].fields.date}</p>
-                              <p class="card-text">${data[i].fields.description}</p>
-                              <div class="mt-auto">
-                                  <a href="status-change/${data[i].pk}", class="button">Status Change</a>
-                                  <a href="delete-task/${data[i].pk}", class="button">Delete Task</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>`)
-              }
-          })
+      function showTask() {
+        let htmlString = "";
+            $.ajax({
+                url: "./json/",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    data.forEach(task => {
+                        var response = ""
+                        if (task.fields.is_finished == true) {
+                        response = "✅ Finished ✅"
+                    } else {
+                        response = "❌ Not Yet ❌"
+                    } 
+
+                        htmlString += `
+              <div class="col-md-6 col-lg-3">
+                <div class="card shadow p-3 mb-5 bg-white rounded border-0" style="padding-right: 10px;">
+                    <div class="card-body d-flex flex-column">
+                    <h4 class="card-title" style="font-weight: bold;">${task.fields.title}</h4>
+                    <h5 class="card-text">
+                        ${response}
+                    </h5>
+                    <p class="card-text" style="font-size: 16px;">${task.fields.date}</p>
+                    <p class="card-text">${task.fields.description}</p>
+                    <div class="mt-auto">
+                        <a href="status-change/${task.pk}", class="btn btn-outline-dark mx-auto d-block">Task Status Change</a>
+                        <a href="delete-task/${task.pk}", class=""btn btn-outline-dark mx-auto d-block">Delete Task</a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+              </div>`
+                            ;
+                        $('#taskCards').html(htmlString);
+                    })
+                }, error: function (data) {
+                    console.log("error");
+                }
+            })
       };
   </script>
 
-  <button type="button" class="button_select_new button_select button" data-bs-toggle="modal" data-bs-target="#addModal" style="background-color:#6200EE">Create new task</button>
-  <a href="{% url 'todolist:logout' %}" class="button" style="float: right; background-color: #6200EE">Logout</a>
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+  crossorigin="anonymous"></script>
+
+  <div>
+    <button type="button" class="btn btn-outline-dark mx-auto d-block" data-bs-toggle="modal" data-bs-target="#exampleModal" style="text-align: center">Create New To Do List</button>
+    <br/>
+    <button class="btn btn-outline-dark mx-auto d-block" style="text-align: center;"><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  </div>
+  <br/>
+
+  <h6>Sesi terakhir login: {{ last_login }}</h6>
   </body>
 </html>
 {% endblock content %}
